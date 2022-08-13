@@ -13,6 +13,7 @@ Just a Thing
 
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
 ![Language](https://img.shields.io/badge/language-java-brightgreen)
+![JRE](https://img.shields.io/badge/jre-[17,+\)-brightgreen)
 
 ## 背景简介
 
@@ -58,6 +59,17 @@ aThing对阿里云的alink协议（v1.5）和部分功能组件进行了实现�
 
 ## 简化代码例子
 
+### 添加仓库
+
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/athingx/athing</url>
+    </repository>
+</repositories>
+```
+
 ### 构建客户端
 
 ```java
@@ -72,8 +84,10 @@ final var thing = new ThingBuilder(new ThingPath(PRODUCT_ID,THING_ID))
 
 ```java
 thing.op().binding("/sys/%s/%s/thing/config/push".formatted(PRODUCT_ID, THING_ID))
-        .map(mappingJsonFromByte(UTF_8))
+        .map(mappingByteToJson(UTF_8))
         .bind((topic,json)->{
-
+            // 这里输出配置内容
         });
 ```
+
+最后我们到[阿里云远程配置](https://iot.console.aliyun.com/lk/monitor/remoteconf)进行配置推送，则可以看到推下来的配置内容。
