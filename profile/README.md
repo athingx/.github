@@ -73,7 +73,7 @@ aThing对阿里云的alink协议（v1.5）和部分功能组件进行了实现�
 
 ```java
 final var thing = new ThingBuilder(new ThingPath(PRODUCT_ID,THING_ID))
-        .client(new AliyunMqttClientFactory()
+        .clientFactory(new AliyunMqttClientFactory()
             .secret(SECRET)
             .remote(REMOTE))
         .build();
